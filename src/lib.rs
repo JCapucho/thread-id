@@ -65,6 +65,12 @@ fn get_internal() -> usize {
     syscall::getpid().unwrap()
 }
 
+#[cfg(target_arch = "wasm32")]
+#[inline]
+fn get_internal() -> usize {
+    0
+}
+
 #[test]
 fn distinct_threads_have_distinct_ids() {
     use std::sync::mpsc;
